@@ -23,6 +23,7 @@ public class CommunicationService {
 
     private final ProcessRepository processRepository;
     private final Queue<Process> queue = new LinkedList<>();
+    private ResponseProcessMsgDto[] msg;
     public void test(Object message) throws JsonProcessingException {
 
         JSONObject object = new JSONObject(message);
@@ -33,11 +34,15 @@ public class CommunicationService {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);   //선언한 필드만 매핑
         String jsonSting = objectMapper.writeValueAsString(message);
-        ResponseProcessMsgDto msg[] = objectMapper.readValue(jsonSting,ResponseProcessMsgDto[].class);
+        msg = objectMapper.readValue(jsonSting,ResponseProcessMsgDto[].class);
         System.out.println(message);
 
-        Process process = ProcessMapper.MAPPER.toEntity(msg[0]);
-        queue.add(process);
+        for(ResponseProcessMsgDto s : msg){
+            Process process = ProcessMapper.MAPPER.toEntity(s);
+            queue.add(process);
+        }
+//        Process process = ProcessMapper.MAPPER.toEntity(msg[0]);
+//        queue.add(process);
 
         //큐 데이터를 세이브하는동안 다른데이터가 들어올경우
 
