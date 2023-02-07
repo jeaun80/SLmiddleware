@@ -7,9 +7,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface ProcessMapper extends EntityMapper<Process, ResponseProcessMsgDto> {
+public interface ProcessMapper extends EntityMapper<Process_TB, ResponseProcessMsgDto> {
 
     ProcessMapper MAPPER = Mappers.getMapper(ProcessMapper.class);
 
-    Process toEntity(final ResponseProcessMsgDto dto);
+    Process_TB toEntity(final ResponseProcessMsgDto dto);
 }

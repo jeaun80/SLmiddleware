@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.ArrayList;
 
-public interface ProcessRepository extends JpaRepository<Process,Long> {
+public interface ProcessRepository extends JpaRepository<Process_TB,Long> {
 
 
 //    @Query("select count from process group by WKCTR_CD")

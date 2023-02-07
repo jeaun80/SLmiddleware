@@ -4,16 +4,43 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import oracle.sql.DATE;
-
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+import com.vladmihalcea.hibernate.id.BatchSequenceGenerator;
 @Entity
 @Getter
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor
-public class Process extends BaseTimeEntity{
+@AllArgsConstructor
+public class Process_TB extends BaseTimeEntity{
+
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "xxx_SEQUENCE_GENERATOR")
-    @SequenceGenerator(name="xxx_SEQUENCE_GENERATOR", sequenceName = "xxx_SEQUENCE", initialValue = 1, allocationSize = 1)
+//    @GenericGenerator(
+//            name = "SequenceGenerator",
+//            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+//            parameters = {
+//                    @Parameter(name = "sequence_name", value = "PROCESS_seq"),
+//                    @Parameter(name = "optimizer", value = "pooled"),
+//                    @Parameter(name = "initial_value", value = "1"),
+//                    @Parameter(name = "increment_size", value = "100")
+//            }
+//
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "SequenceGenerator"
+//    )
+
+    @GenericGenerator(
+            name = "PROCESS_seq",
+            strategy = "com.vladmihalcea.hibernate.id.BatchSequenceGenerator",
+            parameters = {
+                    @Parameter(name = "sequence", value = "PROCESS_seq"),
+                    @Parameter(name = "fetch_size", value = "1000")
+            }
+    )
     private Long PRC_SQ;
 
     @Column
@@ -59,5 +86,10 @@ public class Process extends BaseTimeEntity{
     private int DATA_A_06;
     private int DATA_B_06;
     private DATE END_DT_06;
+
+    private String ERR_CD;
+    private DATE ERR_DT;
+    private String ERR_PRC_CD;
+
 
 }
