@@ -20,13 +20,13 @@ import org.springframework.messaging.MessageHandler;
 public class MqttConfig {
 
     private final CommunicationService comunicationService;
-    private static final String BROKER_URL = "tcp://118.41.132.222:1883";
-    private static final String MQTT_CLIENT_ID = MqttAsyncClient.generateClientId();
-    private static final String TOPIC_FILTER = "homenet/Sensor1/#";
-
-//    private static final String BROKER_URL = "tcp://localhost:1883";
+//    private static final String BROKER_URL = "tcp://118.41.132.222:1883";
 //    private static final String MQTT_CLIENT_ID = MqttAsyncClient.generateClientId();
-//    private static final String TOPIC_FILTER = "every";
+//    private static final String TOPIC_FILTER = "homenet/Sensor1/#";
+
+    private static final String BROKER_URL = "tcp://localhost:1883";
+    private static final String MQTT_CLIENT_ID = MqttAsyncClient.generateClientId();
+    private static final String TOPIC_FILTER = "every";
 
     //토픽은 공장별로 다르게 한다.
     @Bean
@@ -56,7 +56,7 @@ public class MqttConfig {
 
 //            if(message.getHeaders().get("statuscode"))
             try {
-                comunicationService.test(message.getPayload());
+                comunicationService.parsing(message.getPayload());
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }

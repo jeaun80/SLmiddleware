@@ -29,6 +29,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-integration'
     implementation 'org.springframework.integration:spring-integration-mqtt'
     implementation 'org.json:json:20220924'
+    implementation 'com.vladmihalcea:hibernate-types-60:2.21.1'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
