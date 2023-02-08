@@ -8,6 +8,7 @@ import lombok.Setter;
 import oracle.sql.DATE;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.springframework.data.repository.query.Param;
 
 @Entity
 @Getter
@@ -20,7 +21,7 @@ public class Process_State_TB extends BaseTimeEntity{
             name = "StateSequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "STATE_SQ")
+                    @Parameter(name = "sequence_name", value = "PROCESS_STATE_SQ"),
             }
     )
     @GeneratedValue(
