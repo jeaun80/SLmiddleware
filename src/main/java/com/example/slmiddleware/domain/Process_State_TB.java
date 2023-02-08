@@ -20,7 +20,7 @@ public class Process_State_TB extends BaseTimeEntity{
             name = "StateSequenceGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "PROCESS_STATE_seq")
+                    @Parameter(name = "sequence_name", value = "STATE_SQ")
             }
     )
     @GeneratedValue(
