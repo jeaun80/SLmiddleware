@@ -16,17 +16,25 @@ import org.hibernate.annotations.Parameter;
 @AllArgsConstructor
 public class Process_State_TB extends BaseTimeEntity{
     @Id
-        @GenericGenerator(
-            name = "StateSequenceGenerator",
-            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+
+    @GenericGenerator(
+            name = "PROCESS_STATE_seq",
+            strategy = "com.vladmihalcea.hibernate.id.BatchSequenceGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "PROCESS_STATE_seq")
+                    @Parameter(name = "sequence", value = "PROCESS_STATE_seq"),
             }
     )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "StateSequenceGenerator"
-    )
+//        @GenericGenerator(
+//            name = "StateSequenceGenerator",
+//            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+//            parameters = {
+//                    @Parameter(name = "sequence_name", value = "PROCESS_STATE_seq")
+//            }
+//    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "StateSequenceGenerator"
+//    )
     private long STATE_SQ;
 
     @Column
