@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import oracle.sql.DATE;
 import org.apache.activemq.artemis.json.JsonObject;
 import org.springframework.messaging.Message;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -61,15 +62,22 @@ public class CommunicationService {
         try{
             queue.add(msg);
             if(queue.size()>=100 || stopWatch.getTotalTimeSeconds()>60){
-                processRepository.saveAll(queue);
-                queue.clear();
-                stopWatch.stop();
+                processSave();
             }
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    public void processSave(){
+        try{
+            processRepository.saveAll(queue);
+            queue.clear();
+            stopWatch.stop();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     public void errorHanding(Object msg){
         Process_State_TB process_state_tb= new Process_State_TB();
         try {
@@ -87,7 +95,18 @@ public class CommunicationService {
             e.printStackTrace();
         }
     }
-
+    @Scheduled(fixedDelay = 60000,initialDelay = 1000)
+    public void timeOut(){
+        try{
+            if(stopWatch.isRunning()){
+                if(stopWatch.getTotalTimeSeconds()>55){
+                    processSave();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     public void t(String a) throws JsonProcessingException {//postman으로 json파싱 검사를 위한 메서드
         String j = "{\n" +
                 "    \"WKCTR_CD\" : \"FA1WK1\",\n" +
