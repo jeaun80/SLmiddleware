@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.MessagingGateway;
@@ -26,19 +27,23 @@ import org.springframework.messaging.handler.annotation.Header;
 public class MqttConfig {
 
     private final CommunicationService comunicationService;
-//    private static final String BROKER_URL = "tcp://118.41.132.222:1883";
-//    private static final String MQTT_CLIENT_ID = MqttAsyncClient.generateClientId();
-//    private static final String TOPIC_FILTER = "homenet/Sensor1/#";
-
-    private static final String BROKER_URL = "tcp://localhost:1883";
+    private static final String BROKER_URL = "tcp://118.41.132.222:1883";
     private static final String MQTT_CLIENT_ID = MqttAsyncClient.generateClientId();
-    private static final String TOPIC_FILTER = "every";
+    private static final String TOPIC_FILTER = "homenet/Sensor1/#";
+
+//    private static final String BROKER_URL = "tcp://172.20.10.5:1883";
+//    private static final String MQTT_CLIENT_ID = MqttAsyncClient.generateClientId();
+//    private static final String TOPIC_FILTER = "every";
 
     //토픽은 공장별로 다르게 한다.
     @Bean
     public MessageChannel mqttInputChannel() {
         return new DirectChannel();
     }
+
+    void messageArrived(String topic, MqttMessage message) throws Exception{
+
+    };
 
     @Bean
     public MessageProducer inboundChannel() {

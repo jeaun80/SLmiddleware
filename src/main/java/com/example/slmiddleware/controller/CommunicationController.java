@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommunicationController {
 
     private final CommunicationService communicationService;
-//    @Scheduled(cron = "0 0 23 * * *", zone = "Asia/Seoul")
     @PostMapping("/hi")
-    public void t(@RequestBody String a) throws JsonProcessingException {
-        communicationService.t(a);
+    public void t(@RequestBody String testmsg) throws JsonProcessingException {
+        communicationService.t(testmsg);
+    }
+    @PostMapping("/test")
+    public void test(@RequestBody String testmsg) throws JsonProcessingException {
+        communicationService.test(testmsg);
     }
 }
