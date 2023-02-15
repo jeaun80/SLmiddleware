@@ -3,6 +3,7 @@ package com.example.slmiddleware.config;
 import com.example.slmiddleware.service.CommunicationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -24,14 +25,14 @@ import org.springframework.messaging.handler.annotation.Header;
 
 @Configuration
 @RequiredArgsConstructor
+@Log4j2
 public class MqttConfig {
 
     private final CommunicationService comunicationService;
     private static final String BROKER_URL = "tcp://118.41.132.222:1883";
     private static final String MQTT_CLIENT_ID = MqttAsyncClient.generateClientId();
     private static final String TOPIC_FILTER = "homenet/Sensor1/#";
-
-//    private static final String BROKER_URL = "tcp://172.20.10.5:1883";
+//    private static final String BROKER_URL = "tcp://192.168.1.101:1883";
 //    private static final String MQTT_CLIENT_ID = MqttAsyncClient.generateClientId();
 //    private static final String TOPIC_FILTER = "every";
 
@@ -62,10 +63,8 @@ public class MqttConfig {
         return message -> {
             //에러 핸들러 message 상태코드를 확인해서 오류일경우 오류 로그 남기고, 오류데이터 저장 후 공정데이터 저장하지않고 종료
             String topic = (String) message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC);
-            System.out.println("Topic:" + topic);
-            System.out.println("Payload:" + message.getPayload());
-
-//            if(message.getHeaders().get("statuscode"))
+            log.info("Topic:" + topic);
+            log.info("Payload:" + message.getPayload());
             try {
                 comunicationService.parsing(message.getPayload());
             } catch (JsonProcessingException e) {

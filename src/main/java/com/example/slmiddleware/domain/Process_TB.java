@@ -30,35 +30,21 @@ public class Process_TB extends BaseTimeEntity{
 //            }
 //
 //    )
-//    @GeneratedValue(
-//            strategy = GenerationType.SEQUENCE,
-//            generator = "SequenceGenerator"
-//    )
-//    @GeneratedValue(strategy = GenerationType.AUTO, generator = "test-sequence-generator")
 //    @GenericGenerator(
-//            name = "test-sequence-generator",
-//            strategy = "sequence",
+//            name = "PROCESS_seq",
+//            strategy = "com.vladmihalcea.hibernate.id.BatchSequenceGenerator",
 //            parameters = {
-//                    @Parameter(name = SequenceStyleGenerator.SEQUENCE_PARAM, value = "PROCESS_seq"),
-//                    @Parameter(name = SequenceStyleGenerator.INITIAL_PARAM, value = "1"),
-//                    @Parameter(name = SequenceStyleGenerator.INCREMENT_PARAM, value = "1000"),
-//                    @Parameter(name = AvailableSettings.PREFERRED_POOLED_OPTIMIZER, value = "pooled-lo")
+//                    @Parameter(name = "sequence", value = "PROCESS_seq"),
+//                    @Parameter(name = "fetch_size", value = "30")
 //            }
 //    )
-//
-    @GenericGenerator(
-            name = "PROCESS_seq",
-            strategy = "com.vladmihalcea.hibernate.id.BatchSequenceGenerator",
-            parameters = {
-                    @Parameter(name = "sequence", value = "PROCESS_seq"),
-                    @Parameter(name = "fetch_size", value = "30")
-            }
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "PROCESS_seq"
-    )
+//    @GeneratedValue(
+//            strategy = GenerationType.SEQUENCE,
+//            generator = "PROCESS_seq"
+//    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long PRC_SQ;
+
 
     @Column
     private String WKCTR_CD;

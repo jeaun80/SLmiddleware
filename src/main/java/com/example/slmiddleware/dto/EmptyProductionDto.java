@@ -1,13 +1,13 @@
 package com.example.slmiddleware.dto;
 
 import lombok.*;
-import oracle.sql.DATE;
+
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmptyProductionDto {
 
 //    String getWKCTR_CD();
@@ -17,8 +17,8 @@ public class EmptyProductionDto {
 //    String getPRD_DT();
 //    private
     private String WKCTR_CD;
-    private long PRD_AMT;
-    private long FAIR_PRD_AMT;
-    private long ERR_PRD_AMT;
+    private int PRD_AMT;
+    private int FAIR_PRD_AMT;
+    private int ERR_PRD_AMT;
     private String PRD_DT;
 }

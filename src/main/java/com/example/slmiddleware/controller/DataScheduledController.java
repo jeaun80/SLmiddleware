@@ -19,15 +19,16 @@ public class DataScheduledController {
         try{
             communicationService.sum();
         }catch (Exception e){
-            e.printStackTrace();
-            log.error("");
+            log.error("일별생산량 집계 오류"+ e.getMessage());
         }
     }
-//    @Scheduled(fixedDelay = 60000,initialDelay = 0)
-//    public void timeout(){
-//        communicationService.timeOut();
-//        communicationService.sum();
-//        System.out.println("........si");
-//
-//    }
+    @Scheduled(fixedDelay = 60000,initialDelay = 0)
+    public void timeout(){
+        try{
+            communicationService.timeOut();
+            log.debug("timeout");
+        }catch (Exception e){
+            log.error("timeouterror : "+ e.getMessage());
+        }
+    }
 }

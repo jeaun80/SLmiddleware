@@ -12,7 +12,10 @@ import java.util.Date;
 @Setter
 public class Test_TB {
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long ID;
 
 //    @Temporal(TemporalType.TIME)

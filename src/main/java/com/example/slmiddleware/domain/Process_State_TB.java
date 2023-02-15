@@ -1,10 +1,7 @@
 package com.example.slmiddleware.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import oracle.sql.DATE;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -12,18 +9,18 @@ import org.hibernate.annotations.Parameter;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Process_State_TB extends BaseTimeEntity{
     @Id
-
-    @GenericGenerator(
-            name = "PROCESS_STATE_seq",
-            strategy = "com.vladmihalcea.hibernate.id.BatchSequenceGenerator",
-            parameters = {
-                    @Parameter(name = "sequence", value = "PROCESS_STATE_seq"),
-            }
-    )
+//    @GenericGenerator(
+//            name = "PROCESS_STATE_seq",
+//            strategy = "com.vladmihalcea.hibernate.id.BatchSequenceGenerator",
+//            parameters = {
+//                    @Parameter(name = "sequence", value = "PROCESS_STATE_seq"),
+//            }
+//    )
 //        @GenericGenerator(
 //            name = "StateSequenceGenerator",
 //            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
@@ -35,11 +32,13 @@ public class Process_State_TB extends BaseTimeEntity{
 //            strategy = GenerationType.SEQUENCE,
 //            generator = "StateSequenceGenerator"
 //    )
-    private long STATE_SQ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long STATE_SQ;
 
     @Column
-    private long PRC_SQ;
+    private Long PRC_SQ;
     private String ERR_CD;
-    private DATE ERR_DT;
-    private DATE END_DT;
+    private String ERR_DT;
+    private String END_DT;
 }
