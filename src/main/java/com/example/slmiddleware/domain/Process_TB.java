@@ -19,29 +19,6 @@ import org.hibernate.id.enhanced.SequenceStyleGenerator;
 public class Process_TB extends BaseTimeEntity{
 
     @Id
-//    @GenericGenerator(
-//            name = "SequenceGenerator",
-//            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-//            parameters = {
-//                    @Parameter(name = "sequence_name", value = "PROCESS_seq"),
-//                    @Parameter(name = "optimizer", value = "pooled"),
-//                    @Parameter(name = "initial_value", value = "1"),
-//                    @Parameter(name = "increment_size", value = "100")
-//            }
-//
-//    )
-//    @GenericGenerator(
-//            name = "PROCESS_seq",
-//            strategy = "com.vladmihalcea.hibernate.id.BatchSequenceGenerator",
-//            parameters = {
-//                    @Parameter(name = "sequence", value = "PROCESS_seq"),
-//                    @Parameter(name = "fetch_size", value = "30")
-//            }
-//    )
-//    @GeneratedValue(
-//            strategy = GenerationType.SEQUENCE,
-//            generator = "PROCESS_seq"
-//    )
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long PRC_SQ;
 

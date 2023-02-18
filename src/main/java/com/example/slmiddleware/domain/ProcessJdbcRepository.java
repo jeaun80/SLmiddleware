@@ -79,49 +79,6 @@ public class ProcessJdbcRepository {
                 ps.setString(39, subItems.get(i).getERR_PRC_CD());
                 ps.setString(40, subItems.get(i).getWKCTR_CD());
                 ps.setString(41, subItems.get(i).getCREATE_DT());
-
-//                ps.setLong(1,subItems.get(i).getPRC_SQ());
-//                ps.setString(2, subItems.get(i).getPRC_CD_01());
-//                ps.setInt(3, subItems.get(i).getQUALITY_01());
-//                ps.setString(4, subItems.get(i).getCREATE_DT_01());
-//                ps.setString(5, subItems.get(i).getEND_DT_01());
-//                ps.setInt(6, subItems.get(i).getDATA_A_01());
-//                ps.setInt(7, subItems.get(i).getDATA_B_01());
-//                ps.setString(8, subItems.get(i).getPRC_CD_02());
-//                ps.setInt(9, subItems.get(i).getQUALITY_02());
-//                ps.setString(10, subItems.get(i).getCREATE_DT_02());
-//                ps.setString(11, subItems.get(i).getEND_DT_02());
-//                ps.setInt(12, subItems.get(i).getDATA_A_02());
-//                ps.setInt(13, subItems.get(i).getDATA_B_02());
-//                ps.setString(14, subItems.get(i).getPRC_CD_03());
-//                ps.setInt(15, subItems.get(i).getQUALITY_03());
-//                ps.setString(16, subItems.get(i).getCREATE_DT_03());
-//                ps.setString(17, subItems.get(i).getEND_DT_03());
-//                ps.setInt(18, subItems.get(i).getDATA_A_03());
-//                ps.setInt(19, subItems.get(i).getDATA_B_03());
-//                ps.setString(20, subItems.get(i).getPRC_CD_04());
-//                ps.setInt(21, subItems.get(i).getQUALITY_04());
-//                ps.setString(22, subItems.get(i).getCREATE_DT_04());
-//                ps.setString(23, subItems.get(i).getEND_DT_04());
-//                ps.setInt(24, subItems.get(i).getDATA_A_04());
-//                ps.setInt(25, subItems.get(i).getDATA_B_04());
-//                ps.setString(26, subItems.get(i).getPRC_CD_05());
-//                ps.setInt(27, subItems.get(i).getQUALITY_05());
-//                ps.setString(28, subItems.get(i).getCREATE_DT_05());
-//                ps.setString(29, subItems.get(i).getEND_DT_05());
-//                ps.setInt(30, subItems.get(i).getDATA_A_05());
-//                ps.setInt(31, subItems.get(i).getDATA_B_05());
-//                ps.setString(32, subItems.get(i).getPRC_CD_06());
-//                ps.setInt(33, subItems.get(i).getQUALITY_06());
-//                ps.setString(34, subItems.get(i).getCREATE_DT_06());
-//                ps.setString(35, subItems.get(i).getEND_DT_06());
-//                ps.setInt(36, subItems.get(i).getDATA_A_06());
-//                ps.setInt(37, subItems.get(i).getDATA_B_06());
-//                ps.setString(38, subItems.get(i).getERR_CD());
-//                ps.setString(39, subItems.get(i).getERR_DT());
-//                ps.setString(40, subItems.get(i).getERR_PRC_CD());
-//                ps.setString(41, subItems.get(i).getWKCTR_CD());
-//                ps.setString(42, subItems.get(i).getCREATE_DT());
             }
             @Override
             public int getBatchSize() {

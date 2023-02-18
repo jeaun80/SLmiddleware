@@ -1,33 +1,18 @@
 package com.example.slmiddleware.service;
 
 import com.example.slmiddleware.domain.*;
-import com.example.slmiddleware.dto.EmptyProductionDto;
 import com.example.slmiddleware.dto.ProductionDto;
 import com.example.slmiddleware.dto.ResponseProcessMsgDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import oracle.sql.DATE;
-import org.apache.activemq.artemis.json.JsonObject;
-import org.springframework.messaging.Message;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
-
-import org.json.JSONObject;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 @Log4j2
 @Service
 @RequiredArgsConstructor
@@ -57,19 +42,14 @@ public class CommunicationService {
                 errorSave(errprocess);
             }
             Process_TB process = ProcessMapper.MAPPER.toEntity(dto);
-            log.error("queSize"+queue.size());
-            log.error("why");
-            System.out.println("why2");
+            log.debug("queSize"+queue.size());
             queueStore(process);
-            System.out.println("whyafter");
-//            if(process.getERR_CD()!=null){
-//                errorSave(process);
-//            }
         }catch (Exception e){
             stopWatch.stop();
-            log.debug("parsing error"+ e.getMessage());
+            log.error("parsingErrorService"+ e.getMessage());
         }
     }
+
 
 
     public void queueStore(Process_TB msg){
@@ -79,9 +59,11 @@ public class CommunicationService {
                 processSave();
             }
         }catch (Exception e){
-            log.debug("queueStore : "+ e.getMessage());
+            log.error("queueStoreService : "+ e.getMessage());
         }
     }
+
+
 
     @Transactional
     public void processSave(){
@@ -90,11 +72,13 @@ public class CommunicationService {
 //            processJdbcRepository.JdbcsaveAll(queue);
             queue.clear();
             stopWatch.stop();
-            log.info("process save");
+            log.debug("process saveService");
         }catch (Exception e){
-            log.error("processsaveError : "+ e.getMessage() );
+            log.error("processsaveErrorService : "+ e.getMessage() );
         }
     }
+
+
 
     public void errorSave(Process_TB errorprocess){
         try {
@@ -108,9 +92,11 @@ public class CommunicationService {
             log.debug("errorSave Id : "+ errorprocess.getPRC_SQ());
 
         } catch (Exception e) {
-            log.error("errorSave : "+ e.getMessage());
+            log.error("errorSaveService : "+ e.getMessage());
         }
     }
+
+
 
     public boolean timeOut(){
         try{
@@ -122,11 +108,14 @@ public class CommunicationService {
                 }
             }
         }catch (Exception e){
-            log.error("timeOut : " +e.getMessage());
+            log.error("timeOutService : " +e.getMessage());
             return false;
         }
         return false;
     }
+
+
+
     public void sum(){
         List<ProductionDto> production_day_tb = processRepository.findSum();
         if(!production_day_tb.isEmpty()){
@@ -141,12 +130,15 @@ public class CommunicationService {
                         .build();
                 production_day_tbs.add(production_day_tb1);
             }
-            log.info("일별 생산량 집계 : "+productionDayRepository.saveAll(production_day_tbs).toString());
+            log.debug("일별 생산량 집계 : "+productionDayRepository.saveAll(production_day_tbs).toString());
         }
         else{
             log.error("db error");
         }
     }
+
+
+
     public void test(String a) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);   //선언한 필드만 매핑
@@ -160,11 +152,9 @@ public class CommunicationService {
         }
         testJdbcRepository.JdbcsaveAll(testque);
         System.out.println(a);
-//        DATE date = new DATE("2023-02-09");
         System.out.println(dto.getTEST_DT());
         System.out.println(dto.getTEST_STRING());
         System.out.println(dto.getTEST_NUMBER());
         testRepository.save(dto);
-//        testRepository.test();
     }
 }
