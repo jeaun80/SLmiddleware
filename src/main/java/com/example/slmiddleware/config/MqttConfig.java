@@ -36,7 +36,6 @@ public class MqttConfig {
 //    private static final String MQTT_CLIENT_ID = MqttAsyncClient.generateClientId();
 //    private static final String TOPIC_FILTER = "every";
 
-    //토픽은 공장별로 다르게 한다.
     @Bean
     public MessageChannel mqttInputChannel() {
         return new DirectChannel();
@@ -61,7 +60,6 @@ public class MqttConfig {
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler inboundMessageHandler() {
         return message -> {
-            //에러 핸들러 message 상태코드를 확인해서 오류일경우 오류 로그 남기고, 오류데이터 저장 후 공정데이터 저장하지않고 종료
             String topic = (String) message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC);
             log.info("Topic:" + topic);
             log.info("Payload:" + message.getPayload());
